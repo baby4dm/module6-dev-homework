@@ -3,7 +3,7 @@ package org.example;
 import org.example.model.*;
 import org.example.service.DatabaseQueryService;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class Demo {

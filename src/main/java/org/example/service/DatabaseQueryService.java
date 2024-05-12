@@ -4,10 +4,7 @@ import org.example.model.*;
 import org.example.util.Database;
 import org.example.util.QueryReader;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +14,8 @@ public class DatabaseQueryService {
             String query = QueryReader.getQueryFromFile("sql/print_project_prices.sql");
             List<ProjectPrice> projectPrices = new ArrayList<>();
             try {
-                Statement statement = connection.createStatement();
-                ResultSet result = statement.executeQuery(query);
+                PreparedStatement statement = connection.prepareStatement(query);
+                ResultSet result = statement.executeQuery();
                 while (result.next()) {
                     ProjectPrice project = new ProjectPrice();
                     project.setId(result.getInt("project_id"));
@@ -42,8 +39,8 @@ public class DatabaseQueryService {
             String query = QueryReader.getQueryFromFile("sql/find_youngest_eldest_workers.sql");
             List<WorkerAge> workers = new ArrayList<>();
             try {
-                Statement statement = connection.createStatement();
-                ResultSet result = statement.executeQuery(query);
+                PreparedStatement statement = connection.prepareStatement(query);
+                ResultSet result = statement.executeQuery();
                 while (result.next()) {
                     WorkerAge worker = new WorkerAge();
                     worker.setType(result.getString("type"));
@@ -68,8 +65,8 @@ public class DatabaseQueryService {
             String query = QueryReader.getQueryFromFile("sql/find_max_salary_worker.sql");
             List<WorkerSalary> workers = new ArrayList<>();
             try {
-                Statement statement = connection.createStatement();
-                ResultSet result = statement.executeQuery(query);
+                PreparedStatement statement = connection.prepareStatement(query);
+                ResultSet result = statement.executeQuery();
                 while (result.next()) {
                     WorkerSalary worker = new WorkerSalary();
                     worker.setName(result.getString("name"));
@@ -93,8 +90,8 @@ public class DatabaseQueryService {
             String query = QueryReader.getQueryFromFile("sql/find_max_projects_client.sql");
             List<ProjectClient> clients = new ArrayList<>();
             try {
-                Statement statement = connection.createStatement();
-                ResultSet result = statement.executeQuery(query);
+                PreparedStatement statement = connection.prepareStatement(query);
+                ResultSet result = statement.executeQuery();
                 while (result.next()) {
                     ProjectClient client = new ProjectClient();
                     client.setName(result.getString("name"));
@@ -118,8 +115,8 @@ public class DatabaseQueryService {
             String query = QueryReader.getQueryFromFile("sql/find_longest_project.sql");
             List<LongestProject> projects = new ArrayList<>();
             try {
-                Statement statement = connection.createStatement();
-                ResultSet result = statement.executeQuery(query);
+                PreparedStatement statement = connection.prepareStatement(query);
+                ResultSet result = statement.executeQuery();
                 while (result.next()) {
                     LongestProject project = new LongestProject();
                     project.setId(result.getInt("id"));

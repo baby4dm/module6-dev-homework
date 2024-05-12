@@ -5,8 +5,8 @@ import org.example.util.Database;
 import org.example.util.QueryReader;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 @Log
 public class DatabasePopulateService {
 
@@ -14,8 +14,8 @@ public class DatabasePopulateService {
         Connection connection = Database.getInstance().getConnection();
         String query = QueryReader.getQueryFromFile("sql/populate_db.sql");
         try {
-            Statement statement = connection.createStatement();
-            int result = statement.executeUpdate(query);
+            PreparedStatement statement = connection.prepareStatement(query);
+            int result = statement.executeUpdate();
             System.out.println(result);
         } catch (SQLException e) {
             throw new RuntimeException("Error to insert data into table");
